@@ -100,7 +100,26 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Logs
+                </div>
 
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-sticky-note"></i>
+                        <span>Log Data</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            <h6 class="collapse-header">Transaksi Log :</h6>
+                            <a class="collapse-item" href="?pages=logs&aksi=pinjam">Peminjaman</a>
+                            <a class="collapse-item" href="?pages=logs&aksi=kembali">Pengembalian</a>
+                        </div>
+                    </div>
+                </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
@@ -148,7 +167,7 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $data['nama']; ?></span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small font-weight-bold mb-1 text-uppercase"><?= $data['nama']; ?></span>
                                     <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                                 </a>
                                 <!-- Dropdown - User Information -->
@@ -182,16 +201,25 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                     <div class="container-fluid">
                         <div class="bock-header">
 
-
-
                             <?php
                             $pages = $_GET['pages'];
-                            // $aksi = $_GET['aksi'];
-
+                            $aksi = $_GET['aksi'];
                             if ($pages == "anggota") {
-                                include "pages/anggota/anggota.php";
+                                if ($aksi == "") {
+                                    include "pages/anggota/anggota.php";
+                                } elseif ($aksi == "tambah") {
+                                    // include "pages/anggota/tambah.php";
+                                } elseif ($aksi == "ubah") {
+                                    // include "pages/anggota/ubah.php";
+                                } elseif ($aksi == "hapus") {
+                                    include "pages/anggota/hapus.php";
+                                }
                             } elseif ($pages == "buku") {
-                                include "pages/buku/buku.php";
+                                if ($aksi == "hapus") {
+                                    include "pages/buku/hapus.php";
+                                } else {
+                                    include "pages/buku/buku.php";
+                                }
                             } elseif ($pages == "peminjaman") {
                                 include "pages/peminjaman/peminjaman.php";
                             } elseif ($pages == "kembali") {
@@ -200,6 +228,14 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                                 include "pages/user/profile.php";
                             } elseif ($pages == "settings") {
                                 include "pages/user/settings.php";
+                            } elseif ($pages == "kelas") {
+                                include "pages/kelas/kelas.php";
+                            } elseif ($pages == "logs") {
+                                if ($aksi == "pinjam") {
+                                    include "pages/logs/pinjam.php";
+                                } else if ($aksi == "kembali") {
+                                    include "pages/logs/kembali.php";
+                                }
                             } else {
                                 include "pages/dasboard/dasboard.php";
                             }
@@ -254,26 +290,25 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="js/sb-admin-2.min.js"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
         <script src="vendor/datatables/jquery.dataTables.min.js"></script>
         <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="vendor/chart.js/Chart.min.js"></script>
 
         <!-- Page level custom scripts -->
         <script src="js/demo/datatables-demo.js"></script>
 
 
         <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
-
+        <script src="/js/demo/chart-area-demo.js"></script>
+        <script src="/js/demo/chart-pie-demo.js"></script>
     </body>
 
     </html>
