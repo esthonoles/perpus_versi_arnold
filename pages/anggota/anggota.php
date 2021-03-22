@@ -24,12 +24,12 @@ $query = mysqli_query($conn, $select_data);
             </span>
             <span class="text">Import Data From Excel</span>
         </a>
-        <a href="" class="btn btn-success btn-icon-split btn-sm">
+        <!-- <a href="" class="btn btn-success btn-icon-split btn-sm">
             <span class="icon text-white-50">
                 <i class="fas fa-file-export"></i>
             </span>
             <span class="text">Export Data To Excel</span>
-        </a>
+        </a> -->
     </div>
 </div>
 <div class="card shadow mb-4">
@@ -39,7 +39,7 @@ $query = mysqli_query($conn, $select_data);
                 <thead>
                     <tr>
                         <th>NO</th>
-                        <th>No Induk</th>
+                        <th>No Anggota</th>
                         <th>Nama Santri</th>
                         <th>Kelas</th>
                         <th>Jenis Kelamin</th>
@@ -60,7 +60,7 @@ $query = mysqli_query($conn, $select_data);
                             <td class="d-flex justify-content-center">
                                 <a class="btn btn-primary btn-sm " id="btn_edit" data-toggle="modal" data-target="#modal_ubah" data-id="<?= $anggota['no_induk']; ?>" data-nama="<?= $anggota['nama'] ?>" data-kelas="<?= $anggota['id_kelas']; ?>" data-jk="<?= $anggota['jenis_kelamin']; ?>"><i class=" far fa-edit"></i> edit</a>
 
-                                <a class="btn btn-danger btn-sm ml-2" href="?pages=anggota&aksi=hapus&id=<?= $anggota['no_induk']; ?>"><i class="far fa-trash-alt">
+                                <a class="btn btn-danger btn-sm ml-2" onclick="return confirm('Anda yakin mau menghapus item ini ?')" href="?pages=anggota&aksi=hapus&id=<?= $anggota['no_induk']; ?>"><i class="far fa-trash-alt">
                                     </i> hapus</a>
                             </td>
                         </tr>

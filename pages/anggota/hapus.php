@@ -6,7 +6,7 @@ $sql = mysqli_query($conn, "DELETE FROM tb_anggota WHERE no_induk ='$kode'");
 if ($sql) {
 ?>
     <script type="text/javascript">
-        alert("Data Berhasil Dihapus !");
+        // alert("Data Berhasil Dihapus !");
         window.location.href = "?pages=anggota";
     </script>
 <?php

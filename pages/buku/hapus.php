@@ -6,7 +6,7 @@ $sql = mysqli_query($conn, "DELETE FROM tb_buku WHERE id_buku ='$kode'");
 if ($sql) {
 ?>
     <script type="text/javascript">
-        alert("Data Berhasil Dihapus !");
+        // alert("Data Berhasil Dihapus !");
         window.location.href = "?pages=buku";
     </script>
 <?php

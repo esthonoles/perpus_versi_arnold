@@ -5,7 +5,7 @@ require_once "_config/conn.php";
 $kelas = query('SELECT * FROM tb_kelas');
 
 $tanggal = date('l,d-m-Y');
-$jam = date('H:i:s sa');
+$jam = date('H:i:s');
 
 // submit data pengunjung
 if (isset($_POST["submit"])) {
@@ -128,7 +128,7 @@ if (@$_SESSION['admin']) {
 
     if (isset($_POST['login'])) {
         $username = @$_POST['username'];
-        $password = @$_POST['password'];
+        $password = md5(@$_POST['password']);
 
         $sql = mysqli_query($conn, "SELECT * FROM tb_user WHERE username='$username' AND password='$password'");
 

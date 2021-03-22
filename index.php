@@ -19,7 +19,8 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Dasboard Sistaka</title>
+        <title>PERPUS DM</title>
+        <link rel="shortcut icon" href="img/logo.png">
 
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,6 +28,7 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
 
         <!-- Custom styles for this template-->
         <link href="css/sb-admin-2.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
 
         <!-- Custom styles for this page -->
         <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -84,7 +86,14 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                 </li>
 
                 <!-- Nav Item - Utilities Collapse Menu -->
+
                 <li class="nav-item">
+                    <a class="nav-link" href="?pages=peminjaman">
+                        <i class="fas fa-fw fa-random"></i>
+                        <span>Transaksi</span></a>
+                </li>
+
+                <!-- <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                         <i class="fas fa-fw fa-random"></i>
                         <span>Transaksi</span>
@@ -96,7 +105,7 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                             <a class="collapse-item" href="?pages=kembali">Pengembalian</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
@@ -117,16 +126,22 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                             <h6 class="collapse-header">Transaksi Log :</h6>
                             <a class="collapse-item" href="?pages=logs&aksi=pinjam">Peminjaman</a>
                             <a class="collapse-item" href="?pages=logs&aksi=kembali">Pengembalian</a>
+                            <a class="collapse-item" href="?pages=logs&aksi=pengunjung">Pengunjung</a>
                         </div>
                     </div>
                 </li>
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <i class="fas fa-fw fa-file-archive"></i>
-                        <span>Backup Data</span></a>
-                </li>
+
+                <?php
+                if ($data['level'] == 'admin') {
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?pages=backup">
+                            <i class="fas fa-fw fa-file-archive"></i>
+                            <span>Backup Data</span></a>
+                    </li>
+                <?php } ?>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -221,21 +236,40 @@ if ($_SESSION['admin'] || @$_SESSION['user']) {
                                     include "pages/buku/buku.php";
                                 }
                             } elseif ($pages == "peminjaman") {
-                                include "pages/peminjaman/peminjaman.php";
+                                if ($aksi == "tambah") {
+                                    include "pages/peminjaman/tambah_pinjam.php";
+                                } elseif ($aksi == "kembalikan") {
+                                    include "pages/peminjaman/kembalikan.php";
+                                } elseif ($aksi == "perpanjang") {
+                                    include "pages/peminjaman/perpanjang.php";
+                                } else {
+
+                                    include "pages/peminjaman/peminjaman.php";
+                                }
                             } elseif ($pages == "kembali") {
                                 include "pages/kembali/kembali.php";
                             } elseif ($pages == "user") {
                                 include "pages/user/profile.php";
                             } elseif ($pages == "settings") {
+                                if ($aksi == "hapus") {
+                                    include "pages/user/hapus.php";
+                                }
                                 include "pages/user/settings.php";
                             } elseif ($pages == "kelas") {
+                                if ($aksi == "hapus") {
+                                    include "pages/kelas/hapus.php";
+                                }
                                 include "pages/kelas/kelas.php";
                             } elseif ($pages == "logs") {
                                 if ($aksi == "pinjam") {
                                     include "pages/logs/pinjam.php";
                                 } else if ($aksi == "kembali") {
                                     include "pages/logs/kembali.php";
+                                } else if ($aksi == "pengunjung") {
+                                    include "pages/logs/pengunjung.php";
                                 }
+                            } elseif ($pages == "backup") {
+                                include "pages/backup/backup.php";
                             } else {
                                 include "pages/dasboard/dasboard.php";
                             }

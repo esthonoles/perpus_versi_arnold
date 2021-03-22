@@ -23,12 +23,12 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
                 </span>
                 <span class="text">Import Data From Excel</span>
             </a>
-            <a href="" class="btn btn-success btn-icon-split btn-sm">
+            <!-- <a href="" class="btn btn-success btn-icon-split btn-sm">
                 <span class="icon text-white-50">
                     <i class="fas fa-file-export"></i>
                 </span>
                 <span class="text">Export Data To Excel</span>
-            </a>
+            </a> -->
         </div>
     </div>
 
@@ -36,7 +36,7 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
     <div class="card shadow mb-4">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered w-auto" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -68,7 +68,7 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
                                     <a href="" class="btn btn-sm btn-warning ml-1" id="btn_edit" data-toggle="modal" data-target="#modal_edit" data-id="<?= $buku['id_buku']; ?>" data-judul="<?= $buku['judul'] ?>" data-penulis="<?= $buku['penulis'] ?>" data-penerbit="<?= $buku['penerbit'] ?>" data-kategori="<?= $buku['kategori'] ?>" data-tahun="<?= $buku['tahun_terbit'] ?>" data-jumlah="<?= $buku['jumlah'] ?>" data-isbn="<?= $buku['isbn'] ?>">
 
                                         <i class=" far fa-edit"></i></a>
-                                    <a href="?pages=buku&aksi=hapus&id=<?= $buku['id_buku']; ?>" class="btn btn-sm btn-danger ml-2"><i class="far fa-trash-alt">
+                                    <a href="?pages=buku&aksi=hapus&id=<?= $buku['id_buku']; ?>" class="btn btn-sm btn-danger ml-2" onclick="return confirm('Anda yakin mau menghapus item ini ?')"><i class="far fa-trash-alt">
                                         </i></a>
 
                                 </td>
@@ -114,10 +114,23 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
                                 <option value="pembelian">Pembelian</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="tahunTerbit">Tahun Terbit</label>
                             <input class="form-control" name="tahun" type="number" placeholder="tahun terbit" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="tahun">Tahun Terbit</label>
+                            <select class="form-control" name="tahun" id="tahun_terbit" required>
+                                <option value="">-- Pilih --</option>
+                                <?php
+                                for ($tahun = date('Y'); $tahun >= 1990; $tahun--) {
+                                    echo '<option value="' . $tahun . '">' . $tahun . '</option>';
+                                }
+                                ?>
+
+                            </select>
                         </div>
+
                         <div class="form-group">
                             <label for="jumlah">Jumlah </label>
                             <input class="form-control" name="jumlah" type="number" placeholder="jumlah" required>
@@ -145,7 +158,7 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
                 $str = 'ID-BK';
                 $id_auto = $str . sprintf("%04s", $no);
 
-                echo "$id_auto";
+                // echo "$id_auto";
 
 
                 //  fungsi tambah data buku
@@ -218,10 +231,23 @@ $show_buku = mysqli_query($conn, "SELECT * FROM tb_buku");
                                 <option value="pembelian">Pembelian</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="tahunTerbit">Tahun Terbit</label>
                             <input class="form-control" name="ftahun" id="ftahun" type="number" placeholder="tahun terbit" required>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="tahun">Tahun Terbit</label>
+                            <select class="form-control" name="ftahun" id="ftahun" required>
+                                <option value="">-- Pilih --</option>
+                                <?php
+                                for ($tahun = date('Y'); $tahun >= 1990; $tahun--) {
+                                    echo '<option value="' . $tahun . '">' . $tahun . '</option>';
+                                }
+                                ?>
+
+                            </select>
                         </div>
+
                         <div class="form-group">
                             <label for="jumlah">Jumlah </label>
                             <input class="form-control" name="fjumlah" id="fjumlah" type="number" placeholder="jumlah" required>
@@ -276,7 +302,7 @@ if (isset($_POST['update'])) {
 }
 
 
-var_dump($_POST);
+// var_dump($_POST);
 ?>
 
 

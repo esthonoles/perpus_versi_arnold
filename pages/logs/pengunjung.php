@@ -1,21 +1,10 @@
 <?php
 // include "_config/conn.php";
 
-// $kembali = "SELECT * FROM log_pinjam 
-//             INNER JOIN tb_anggota on log_pinjam.no_induk = tb_anggota.no_induk
-//             INNER JOIN tb_buku on log_pinjam.id_buku = tb_buku.id_buku
-//             INNER JOIN tb_sirkulasi on log_pinjam.id_sirkulasi = tb_sirkulasi.id_sirkulasi
-//             ";
+$kunjung = "SELECT * FROM tb_pengunjung INNER JOIN tb_kelas on tb_pengunjung.id_kelas = tb_kelas.id_kelas
+            ";
 
-$select_data = "SELECT * FROM tb_sirkulasi
-INNER JOIN tb_buku on tb_sirkulasi.id_buku = tb_buku.id_buku
-INNER JOIN tb_anggota on tb_sirkulasi.no_induk = tb_anggota.no_induk 
-INNER JOIN tb_kelas on tb_anggota.id_kelas = tb_kelas.id_kelas
--- INNER JOIN tb_anggota on tb_kelas.id_kelas = tb_anggota.id_kelas
-where status = 'kembali'";
-$run = mysqli_query($conn, $select_data);
-
-// $run = mysqli_query($conn, $kembali);
+$run = mysqli_query($conn, $kunjung);
 
 ?>
 
@@ -43,23 +32,26 @@ $run = mysqli_query($conn, $select_data);
                     <table class="table table-striped " id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Nama Anggota</th>
+                                <th>No</th>
+                                <th>Nama</th>
                                 <th>Kelas</th>
-                                <th>Judul Buku</th>
-                                <th>Tgl Pengembalian</th>
+                                <th>Tgl Kunjung</th>
+                                <th>Keperluan</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
+                            $no = 1;
                             foreach ($run as $tampil) :
                             ?>
                                 <tr>
-                                    <td "><?= $tampil['nama'] ?></td>
-                                    <td><?= $tampil['kelas'] ?></td>
-                                    <td><?= $tampil['judul'] ?></td>
-                                    <td><?= $tampil['tgl_kembali'] ?></td>
+                                    <td style="width: 10px;"><?= $no ?></td>
+                                    <td><?= $tampil['nama'] ?></td>
+                                    <td style="width: 10px;"><?= $tampil['kelas'] ?></td>
+                                    <td style="width: 100px;"><?= $tampil['tgl_kunjung'] ?></td>
+                                    <td><?= $tampil['keperluan'] ?></td>
                                 </tr>
-                            <?php
+                            <?php $no++;
                             endforeach ?>
                         </tbody>
                     </table>
